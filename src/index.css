@@ -1,0 +1,111 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100vh;
+}
+
+.control-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 300px;
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  z-index: 1000;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.stats-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.stats-table th, .stats-table td {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.stats-table th {
+  text-align: left;
+}
+
+.stats-table td {
+  text-align: right;
+}
+
+.file-upload {
+  margin-bottom: 15px;
+}
+
+.file-upload input {
+  display: none;
+}
+
+.file-upload label {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+.file-upload label:hover {
+  background-color: #45a049;
+}
+
+select {
+  width: 100%;
+  margin-top: 5px;
+  padding: 5px;
+}
+
+.compare-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.compare-button {
+  padding: 8px 12px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.compare-button:hover {
+  background-color: #0b7dda;
+}
+
+.comparison-stats {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .control-panel {
+    width: 250px;
+  }
+} 
