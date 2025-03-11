@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/route-planner/static/css/main.f40a6448.css",
+    "main.js": "/route-planner/static/js/main.802b0678.js",
+    "index.html": "/route-planner/index.html",
+    "main.f40a6448.css.map": "/route-planner/static/css/main.f40a6448.css.map",
+    "main.802b0678.js.map": "/route-planner/static/js/main.802b0678.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f40a6448.css",
+    "static/js/main.802b0678.js"
+  ]
+}
