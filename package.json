@@ -2,7 +2,7 @@
   "name": "route-planner",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://GijsVerdonschot-360ERP.github.io/route-planner",
+  "homepage": "https://gijsverdonschot-360erp.github.io/route-planner/",
   "dependencies": {
     "@types/leaflet": "^1.9.3",
     "@types/node": "^16.18.46",
