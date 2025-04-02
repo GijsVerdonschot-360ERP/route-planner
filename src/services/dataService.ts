@@ -244,19 +244,23 @@ export const processCSVData = (file: File): Promise<RouteData> => {
           const rows = results.data as any[];
           console.log(`Parsed ${rows.length} rows from CSV`);
           
-          // Process each row to create location objects
           const locations: Location[] = [];
           const failedAddresses: string[] = [];
           
           for (const row of rows) {
+            // Support both old and new field names
+            const name = row['Abonnement'];
+            const deliveryAddress = row['Abonnement/Afleveradres'] || row['Abonnement/Afleveradres/Notities'];
+            const location = row['Locatie'];
+            
             // Skip rows without required fields
-            if (!row['Abonnement'] || !row['Abonnement/Afleveradres']) {
+            if (!name || (!deliveryAddress && !location)) {
               console.warn(`Skipping row due to missing required fields:`, row);
               continue;
             }
             
-            // Extract address
-            const fullAddress = row['Abonnement/Afleveradres'];
+            // Use location field if available, otherwise use delivery address
+            const fullAddress = location || deliveryAddress;
             const address = extractAddress(fullAddress);
             
             // Geocode address
@@ -272,7 +276,12 @@ export const processCSVData = (file: File): Promise<RouteData> => {
                 startTime = new Date(row['Begin datum-tijd']).toISOString();
                 date = startTime;
               } else if (row['Startdatum']) {
-                date = new Date(row['Startdatum']).toISOString();
+                const startDate = new Date(row['Startdatum']);
+                date = startDate.toISOString();
+                // If it's a datetime string, use it for startTime too
+                if (row['Startdatum'].includes(':')) {
+                  startTime = date;
+                }
               }
               
               if (row['Eind datum-tijd']) {
@@ -282,14 +291,16 @@ export const processCSVData = (file: File): Promise<RouteData> => {
               // Create location object
               const location: Location = {
                 id: row['Externe ID'] || `loc_${locations.length}`,
-                name: row['Abonnement'],
+                name: name,
                 address: fullAddress,
+                notes: row['Abonnement/Afleveradres/Notities'],
                 coordinates,
                 time: parseFloat((row['Benodigde tijd (uren)'] || 0).toString().replace(',', '.')),
                 date: date || undefined,
                 startTime: startTime || undefined,
                 endTime: endTime || undefined,
-                assignedTo: row['Toegewezen aan']
+                assignedTo: row['Toegewezen aan'],
+                visitType: row['Bezoektype']
               };
               
               console.log(`Added location: ${location.name} at ${location.address}`);
